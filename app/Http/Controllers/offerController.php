@@ -11,7 +11,8 @@ class offerController extends Controller
     function index()
     {
         $offers = Offer::all();
-        return view('offers.index')->with('offers', $offers);    
+        // return view('offers.index')->with('offers', $offers);    
+        return view('admin.offers.index')->with('offers', $offers);    
     }
 
     function save(Request $request) 

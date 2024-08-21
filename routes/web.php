@@ -4,6 +4,14 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\offerController;
+use App\Http\Controllers\MyHomeController;
+
+use App\Http\Controllers\LoginUserController;
+
+
+
+// admin 
+use App\Http\Controllers\AdminHomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +24,7 @@ use App\Http\Controllers\offerController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [MyHomeController::class, 'index']);
 
 Auth::routes();
 
@@ -32,6 +38,16 @@ Route::get('/check-cancel', [CheckOutController::class ,'cancel'])->name('cancel
 Route::get('/check-success', [CheckOutController::class ,'success'])->name('success.checkout');
 
 
-Route::get('/offer', [offerController::class, 'index'])->name('offer');
-Route::post('/offer', [offerController::class, 'save'])->name('post.offer');
-Route::get('/offer/delete/{id}', [offerController::class, 'delete'])->name('delete.offer');
+Route::get('/login-users',[LoginUserController::class, 'index'])->name('login-users');
+Route::get('/register-users',[LoginUserController::class, 'register'])->name('register-users');
+
+Route::get('/users-offers/{id}', [MyHomeController::class , 'UsersOffers'])->name('users-offers');
+
+
+Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
+    Route::get('/', [AdminHomeController::class, 'index']);
+
+    Route::get('/offer', [offerController::class, 'index'])->name('offer');
+    Route::post('/offer', [offerController::class, 'save'])->name('post.offer');
+    Route::get('/offer/delete/{id}', [offerController::class, 'delete'])->name('delete.offer');
+});

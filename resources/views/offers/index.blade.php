@@ -153,7 +153,6 @@
 
 
     <script>
-
         function update(item){
             console.log(item);
             document.getElementById('id').value = item.id;
@@ -162,9 +161,7 @@
             document.getElementById("salary_min").value = item.salary_min;
             document.getElementById("salary_max").value = item.salary_max;
         }
-
     </script>
-
 </body>
 
 </html>
