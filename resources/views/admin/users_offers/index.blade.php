@@ -5,11 +5,11 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Offers</h1>
+            <h1>Users Offers</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item active">offers</li>
+                    <li class="breadcrumb-item active">users offers</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -27,7 +27,7 @@
 
                             <div class="col-3">
                                 <button type="submit" class="btn btn-primary" style="    margin-top: 32px !important;">Search</button>
-                                <button type="submit" class="btn btn-primary" onclick="clearInput()" style="margin-top: 32px !important;" data-bs-toggle="modal" data-bs-target="#basicModal">Add</button>
+                                {{-- <button type="submit" class="btn btn-primary" onclick="clearInput()" style="margin-top: 32px !important;" data-bs-toggle="modal" data-bs-target="#basicModal">Add</button> --}}
                             </div>
                         </div>
                     </div>
@@ -35,7 +35,7 @@
             </div>
 
 
-            @include('admin.offers.create')
+            @include('admin.users_offers.create')
 
 
             <div class="row">
@@ -50,26 +50,24 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Name</th>
+                                    <th scope="col">Oferr</th>
                                     <th scope="col">Price</th>
-                                    <th scope="col">Salary Min</th>
-                                    <th scope="col">Salary Max</th>
                                     <th scope="col">Created At</th>
-                                    <th scope="col">Action</th>
+                                    {{-- <th scope="col">Action</th> --}}
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($offers as $item)
+                                @foreach ($usersOffer as $item)
                                 <tr>
                                     <th scope="row">{{ $loop->index+1 }}</th>
-                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->user_name }}</td>
+                                    <td>{{ $item->offer_name }}</td>
                                     <td>{{ $item->price }}</td>
-                                    <td>{{ $item->salary_min }}</td>
-                                    <td>{{ $item->salary_max }}</td>
                                     <td>{{ $item->created_at }}</td>
-                                    <td>
+                                    {{-- <td>
                                         <button type="button" class="btn btn-info" onclick="update({{ $item }})" data-bs-toggle="modal" data-bs-target="#basicModal">Update</button>
                                         <a type="button" href="{{ route('delete.offer',$item->id) }}" class="btn btn-danger">Delete</a>
-                                    </td>
+                                    </td> --}}
                                 </tr>
                                 @endforeach
                             </tbody>

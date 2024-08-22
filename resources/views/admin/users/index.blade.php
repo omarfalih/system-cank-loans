@@ -5,11 +5,11 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Offers</h1>
+            <h1>Users</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item active">offers</li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin') }}">Home</a></li>
+                    <li class="breadcrumb-item active">Users</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -35,7 +35,7 @@
             </div>
 
 
-            @include('admin.offers.create')
+            @include('admin.users.create')
 
 
             <div class="row">
@@ -50,26 +50,37 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Name</th>
-                                    <th scope="col">Price</th>
-                                    <th scope="col">Salary Min</th>
-                                    <th scope="col">Salary Max</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Phone</th>
+                                    <th scope="col">Type</th>
                                     <th scope="col">Created At</th>
-                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($offers as $item)
+                                @foreach ($users as $item)
                                 <tr>
                                     <th scope="row">{{ $loop->index+1 }}</th>
                                     <td>{{ $item->name }}</td>
-                                    <td>{{ $item->price }}</td>
-                                    <td>{{ $item->salary_min }}</td>
-                                    <td>{{ $item->salary_max }}</td>
-                                    <td>{{ $item->created_at }}</td>
+                                    <td>{{ $item->email }}</td>
+                                    <td>{{ $item->phone }}</td>
                                     <td>
+
+                                        @if ($item->type == 0)
+                                            <span class="badge text-bg-success">
+                                                الادارة
+                                            </span>
+                                        @else
+                                            <span class="badge text-bg-info">
+                                                موطن
+                                            </span>
+                                        @endif
+
+                                    </td>
+                                    <td>{{ $item->created_at }}</td>
+                                    {{-- <td>
                                         <button type="button" class="btn btn-info" onclick="update({{ $item }})" data-bs-toggle="modal" data-bs-target="#basicModal">Update</button>
                                         <a type="button" href="{{ route('delete.offer',$item->id) }}" class="btn btn-danger">Delete</a>
-                                    </td>
+                                    </td> --}}
                                 </tr>
                                 @endforeach
                             </tbody>

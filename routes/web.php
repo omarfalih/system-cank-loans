@@ -11,7 +11,10 @@ use App\Http\Controllers\LoginUserController;
 
 
 // admin 
-use App\Http\Controllers\AdminHomeController;
+// use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\UserOfferController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,9 +48,21 @@ Route::get('/users-offers/{id}', [MyHomeController::class , 'UsersOffers'])->nam
 
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
-    Route::get('/', [AdminHomeController::class, 'index']);
+    Route::get('/', [AdminController::class, 'index'])->name('admin');
 
+    // Offer
     Route::get('/offer', [offerController::class, 'index'])->name('offer');
     Route::post('/offer', [offerController::class, 'save'])->name('post.offer');
     Route::get('/offer/delete/{id}', [offerController::class, 'delete'])->name('delete.offer');
+
+
+    // users
+    Route::get('/users', [UserController::class, 'index'])->name('admin.users');
+
+
+    // users_offers
+    Route::get('/users-offers', [UserOfferController::class, 'index'])->name('users.offers');
+    Route::post('/users-offers', [UserOfferController::class, 'save'])->name('post.users.offers');
+    Route::get('/users-offers/delete/{id}', [UserOfferController::class, 'delete'])->name('delete.users.offers');
+
 });

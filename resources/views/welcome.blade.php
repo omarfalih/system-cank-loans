@@ -201,9 +201,15 @@
 
             <div class="container">
 
-              @if (isset($msg) && Session::has('msg'))
+              @if (session('success'))
                 <div class="alert alert-primary" role="alert">
-                  {{ $msg }}
+                  {{ session('success') }}
+                </div>
+              @endif
+
+              @if (session('error'))
+                <div class="alert alert-danger" role="alert">
+                  {{ session('error') }}
                 </div>
               @endif
 

@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Offer;
 use App\Models\UserOffer;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MyHomeController extends Controller
@@ -26,7 +27,7 @@ class MyHomeController extends Controller
             // check
             $check = UserOffer::where('user_id', auth()->user()->id)->where('offer_id',$offer->id)->count();
             if($check > 0){
-                return redirect()->back()->with('msg' ,' error ');
+                return redirect()->back()->with('error' ,'لقد قدمت مسبقاً على هذه الخدمة ');
             }
 
             // create new row
@@ -36,6 +37,8 @@ class MyHomeController extends Controller
             $userOffer->save();
         }
 
-        return redirect()->back()->with('msg' ,' suucess ');
+        $smg = ' تم التقديم بنجاح ' . $offer->name . " " .  $offer->price;
+
+        return redirect()->back()->with('success' ,$smg);
     }
 }
